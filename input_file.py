@@ -41,18 +41,18 @@ class InputFile:
             contributors.append(Contributor(name, skills))
 
         for idx in range(num_projects):
-            skills = {}
+            skills = []
             project_name, duration, score, best_before, num_skills = file_lines[0].split()
             duration, score, best_before, num_skills = int(duration), int(score), int(best_before), int(num_skills)
             file_lines = file_lines[1:]
             if num_skills == 0:
-                projects.append(Project(project_name, duration, score, best_before, {}))
+                projects.append(Project(project_name, duration, score, best_before, []))
                 continue
             skill_lines = file_lines[:num_skills]
             for skill in skill_lines:
                 lang, level = skill.split()
                 level = int(level)
-                skills[lang] = level
+                skills.append((lang, level))
             file_lines = file_lines[num_skills:]
             projects.append(Project(project_name, duration, score, best_before, skills))
 

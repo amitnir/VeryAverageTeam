@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 
 @dataclass
@@ -8,10 +8,15 @@ class Project:
     duration: int
     score: int
     best_before: int
-    skills: Dict[str, int]
+    skills: List[Tuple[str, int]]
 
 
 @dataclass
 class Contributor:
     name: str
     skills: Dict[str, int]
+
+
+class ProjectSolution:
+    project: Project
+    contributors: List[Contributor]
