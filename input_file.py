@@ -30,7 +30,7 @@ class InputFile:
             num_skills = int(num_skills)
             file_lines = file_lines[1:]
             if num_skills == 0:
-                contributors.append(Contributor(name, {}))
+                contributors.append(Contributor(name, {}, 0))
                 continue
             skill_lines = file_lines[:num_skills]
             for skill in skill_lines:
@@ -38,7 +38,7 @@ class InputFile:
                 level = int(level)
                 skills[lang] = level
             file_lines = file_lines[num_skills:]
-            contributors.append(Contributor(name, skills))
+            contributors.append(Contributor(name, skills, 0))
 
         for idx in range(num_projects):
             skills = []
