@@ -7,6 +7,7 @@ from input_file import InputFile
 from output_file import generate_output_file
 from solver import Solver
 from validator import validate_solution
+import scorer
 
 
 def solve(input_file_name, proj_picker, assignees_picker):
@@ -21,8 +22,8 @@ def solve(input_file_name, proj_picker, assignees_picker):
         ap_sol = ap.get_sol()
         if ap_sol is None:
             continue
-        contributors = ap_sol.get_updated_contributors_state(contributors)
         proj_solutions.append(ap_sol)
+        print(scorer.get_score(proj_solutions))
     output_file.generate_output_file(proj_solutions, input_file_name + "_output.txt")
 
 

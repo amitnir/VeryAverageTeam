@@ -10,6 +10,8 @@ class assignProjects:
     def _get_best_contributor(self, skill: Tuple[str, int]):
         is_first = True
         for cont in self.con_list:
+            if cont in self.sol_con_list:
+                continue
             if is_first:
                 min_dist = cont.get_role_dist(skill)
                 cur_cont = cont
@@ -27,12 +29,21 @@ class assignProjects:
         pass
 
     def get_sol(self) -> ProjectSolution:
-        sol_con_list = list()
+        self.sol_con_list = list()
         for skill in self.project.skills:
             best_cont = self._get_best_contributor(skill)
             if best_cont is None:
                 return None
-            sol_con_list.append(best_cont)
-        project_sol = ProjectSolution(self.project, sol_con_list)
+            self.sol_con_list.append(best_cont)
+        project_sol = ProjectSolution(self.project, self.sol_con_list)
+        self.updated_contributors_state(project_sol, self.con_list)
         return project_sol
+
+    def updated_contributors_state(self, proj_solution:ProjectSolution, contributors: List[Contributor]):
+        """Update state of all contributors based on this solution"""
+        next_available_day = proj_solution.start_day + proj_solution.project.duration
+        for c in contributors:
+            if c in self.sol_con_list:
+                continue
+            c.next_available_day = next_available_day
 
