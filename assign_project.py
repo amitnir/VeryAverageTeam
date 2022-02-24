@@ -29,7 +29,7 @@ class assignProjects:
         pass
 
     def get_sol(self) -> ProjectSolution:
-        self.sol_con_list = list()
+        self.sol_con_list: List[Contributor] = list()
         for skill in self.project.skills:
             best_cont = self._get_best_contributor(skill)
             if best_cont is None:
@@ -42,8 +42,8 @@ class assignProjects:
     def updated_contributors_state(self, proj_solution:ProjectSolution, contributors: List[Contributor]):
         """Update state of all contributors based on this solution"""
         next_available_day = proj_solution.start_day + proj_solution.project.duration
-        for c in contributors:
-            if c in self.sol_con_list:
-                continue
+        for i, c in enumerate(self.sol_con_list):
             c.next_available_day = next_available_day
-
+            skill = proj_solution.project.skills[i]
+            if c.skills[skill[0]] <= skill[1]:
+                c.skills[skill[0]] += 1
