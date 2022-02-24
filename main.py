@@ -12,14 +12,16 @@ from validator import validate_solution
 def solve(input_file_name, proj_picker, assignees_picker):
     print(input_file_name)
     input_file = InputFile(input_file_name)
-    pp = proj_picker(input_file.projects, input_file.contributors)
+    contributors = input_file.contributors
+    pp = proj_picker(input_file.projects, contributors)
     proj_solutions = []
     while(input_file.projects):
         curr_proj = pp.pick_project()
-        ap = assignees_picker(curr_proj, input_file.contributors)
+        ap = assignees_picker(curr_proj, contributors)
         ap_sol = ap.get_sol()
         if ap_sol is None:
             continue
+        contributors = ap_sol.get_updated_contributors_state(contributors)
         proj_solutions.append(ap_sol)
     output_file.generate_output_file(proj_solutions, input_file_name + "_output.txt")
 
