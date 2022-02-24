@@ -9,7 +9,7 @@ class Contributor:
     skills: Dict[str, int]
     next_available_day: int
 
-    def get_role_dist(self):
+    def get_role_dist(self, skill):
         """ returns distance if not relevant returns -1"""
 
 
