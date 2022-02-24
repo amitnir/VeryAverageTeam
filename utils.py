@@ -20,12 +20,20 @@ class Project:
     best_before: int
     skills: List[Tuple[str, int]]
 
-    def get_proj_score(self):
+    def get_final_score(self, start_day):
         """returns score of the project"""
-        pass
+        return self.score - max(0, start_day + self.duration - self.best_before)
 
 
 @dataclass
 class ProjectSolution:
     project: Project
     contributors: List[Contributor]
+
+    @property
+    def start_day(self):
+        return max(c.next_available_day for c in self.contributors)
+
+    @property
+    def score(self):
+        return self.project.get_final_score(self.start_day)
