@@ -1,3 +1,4 @@
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import List, Dict, Tuple
 
@@ -37,3 +38,12 @@ class ProjectSolution:
     @property
     def score(self):
         return self.project.get_final_score(self.start_day)
+
+    def get_updated_contributors(self):
+        contributors = {}
+        next_available_day = self.start_day + self.project.duration
+        for c in self.contributors:
+            cc = deepcopy(c)
+            cc.next_available_day = next_available_day
+            contributors.add(cc)
+        return contributors
