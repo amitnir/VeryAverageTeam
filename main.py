@@ -17,7 +17,10 @@ def solve(input_file_name, proj_picker, assignees_picker):
     while(input_file.projects):
         curr_proj = pp.pick_project()
         ap = assignees_picker(curr_proj, input_file.contributors)
-        proj_solutions.append(ap.get_sol())
+        ap_sol = ap.get_sol()
+        if ap_sol is None:
+            continue
+        proj_solutions.append(ap_sol)
     output_file.generate_output_file(proj_solutions, input_file_name + "_output.txt")
 
 

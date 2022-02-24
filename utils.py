@@ -1,3 +1,4 @@
+import math
 from copy import deepcopy
 from dataclasses import dataclass
 from typing import List, Dict, Tuple
@@ -10,7 +11,10 @@ class Contributor:
     next_available_day: int
 
     def get_role_dist(self, skill):
-        """ returns distance if not relevant returns -1"""
+        lang, level = skill
+        if self.skills[lang] >= level:
+            return self.skills[lang] - level
+        return math.inf
 
 
 @dataclass
