@@ -8,7 +8,7 @@ class Contributor:
     name: str
     skills: Dict[str, int]
 
-    def get_role_dist(self):
+    def get_role_dist(self, skill):
         """ returns distance if not relevant returns -1"""
 
 
