@@ -33,6 +33,6 @@ class assignProjects:
             if best_cont is None:
                 return None
             sol_con_list.append(best_cont)
-        project_sol = ProjectSolution(project=self.project, contributors=sol_con_list)
+        project_sol = ProjectSolution(self.project, sol_con_list)
         return project_sol
 
