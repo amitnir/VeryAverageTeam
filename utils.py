@@ -13,24 +13,19 @@ class Contributor:
 
 
 @dataclass
-class Role:
-    skills: Dict[str, int]
-    best_before: int
-    duration: int
-
-
-@dataclass
 class Project:
     name: str
-    Roles: List[Role]
-    score: int
     duration: int
+    score: int
+    best_before: int
+    skills: List[Tuple[str, int]]
 
     def get_proj_score(self):
         """returns score of the project"""
         pass
 
 
+@dataclass
 class ProjectSolution:
     project: Project
     contributors: List[Contributor]
