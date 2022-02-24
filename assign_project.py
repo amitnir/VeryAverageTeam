@@ -18,7 +18,7 @@ class assignProjects:
                 if min_dist > cur_dist:
                     min_dist = cur_dist
                     cur_cont = cont
-        cur_cont.next_available_day += self.project.duration
+        return cur_cont
 
     def update_assignees(self, cont: Contributor):
         pass
@@ -26,6 +26,7 @@ class assignProjects:
     def get_sol(self) -> ProjectSolution:
         sol_con_list = list()
         for skill in self.project.skills:
-            sol_con_list.append(self._get_best_contributor())
-        return sol_con_list
+            sol_con_list.append(self._get_best_contributor(skill))
+        project_sol = ProjectSolution(project=self.project, contributors=sol_con_list)
+        return project_sol
 
